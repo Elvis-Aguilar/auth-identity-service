@@ -1,0 +1,12 @@
+package com.eat.sleep.auth_identity_service.common.application.exception;
+
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import static org.springframework.http.HttpStatus.CONFLICT;
+
+@ResponseStatus(value = CONFLICT)
+public class EntityConflictUserType extends RuntimeException {
+    public EntityConflictUserType(String message) {
+        super(message);
+    }
+}
