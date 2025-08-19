@@ -1,5 +1,6 @@
 package com.eat.sleep.auth_identity_service.user.infrastructure.outputadapter.persistence.entity;
 
+import com.eat.sleep.auth_identity_service.customer.infrastructure.outputadapter.persistence.entity.CustomerDBEntity;
 import com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.entity.EmployeeDBEntity;
 import com.eat.sleep.auth_identity_service.role.infrastructure.output.persistence.entity.RoleDBEntity;
 import jakarta.persistence.*;
@@ -35,13 +36,13 @@ public class UserDBEntity {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = true)
     @ManyToOne(optional = true)
     @JoinColumn(name = "employee_id")
     private EmployeeDBEntity employee;
 
-    @Column(nullable = true)
-    private UUID CustomerId;
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "customer_id")
+    private CustomerDBEntity customer;
 
     private boolean active;
 

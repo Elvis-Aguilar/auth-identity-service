@@ -7,6 +7,7 @@ import com.eat.sleep.auth_identity_service.user.application.usecase.createuserem
 import com.eat.sleep.auth_identity_service.user.domain.model.UserEmployee;
 import com.eat.sleep.auth_identity_service.user.infrastructure.inputadapter.dto.UserEmployeeRequest;
 import com.eat.sleep.auth_identity_service.user.infrastructure.inputadapter.dto.UserEmployeeResponseDto;
+import com.eat.sleep.auth_identity_service.user.infrastructure.inputadapter.mapper.UserEmployeeMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("v1/user/employee/auth")
 @WebAdapter
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserEmployeeControllerAdapter {
 
     private final CreatingUserEmployeeInputPort creatingUserEmployeeInputPort;
+    private final UserEmployeeMapper userEmployeeMapper;
 
     @PostMapping("/sign-up")
     @Transactional
@@ -33,13 +34,7 @@ public class UserEmployeeControllerAdapter {
 
         UserEmployee userEmployee = this.creatingUserEmployeeInputPort.createUserEmployee(objectAdapterFromToDomain);
 
-        UserEmployeeResponseDto userEmployeeResponse = UserEmployeeResponseDto.builder()
-                .id(userEmployee.getId())
-                .employeeId(userEmployee.getEmployeeId())
-                .role(userEmployee.getRole())
-                .email(userEmployee.getEmail())
-                .active(userEmployee.isActive())
-                .build();
+        UserEmployeeResponseDto userEmployeeResponse = userEmployeeMapper.toResponseDto(userEmployee);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userEmployeeResponse);
     }

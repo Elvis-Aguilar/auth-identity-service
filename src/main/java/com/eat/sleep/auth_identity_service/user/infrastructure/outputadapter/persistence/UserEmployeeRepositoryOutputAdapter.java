@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class UserEmployeeRepositoryOutputAdapter implements FindingUserEmployeeByEmailAndRoleOutputPort, StoringUserEmployeeOutputPort {
+    public class UserEmployeeRepositoryOutputAdapter implements FindingUserEmployeeByEmailAndRoleOutputPort, StoringUserEmployeeOutputPort {
 
     private final UserDBRepository userDBRepository;
     private final UserMapper userMapper;
@@ -38,6 +38,7 @@ public class UserEmployeeRepositoryOutputAdapter implements FindingUserEmployeeB
     }
 
     @Override
+    @Transactional
     public UserEmployee save(UserEmployee userEmployee, Employee employee) {
         RoleDBEntity roleDBEntity = this.roleDBRepository.findByName(userEmployee.getRole().getName())
                 .orElseThrow(()-> new RoleNotExist("No existe el rol para el empleado"));

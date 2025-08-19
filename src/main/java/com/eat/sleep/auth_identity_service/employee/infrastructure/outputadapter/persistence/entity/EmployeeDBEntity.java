@@ -63,7 +63,7 @@ public class EmployeeDBEntity {
     @Column(nullable = true)
     private UUID RestaurantId;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "employee")
     private Set<UserDBEntity> users;
 
     @CreationTimestamp

@@ -49,7 +49,7 @@ public class CustomerDBEntity {
 
     private Integer loyaltyPoints = 0;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "customer")
     private Set<UserDBEntity> users;
 
     @CreationTimestamp
