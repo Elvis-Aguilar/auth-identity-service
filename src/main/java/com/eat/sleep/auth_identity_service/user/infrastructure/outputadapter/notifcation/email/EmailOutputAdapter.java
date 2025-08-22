@@ -6,7 +6,7 @@ import com.eat.sleep.auth_identity_service.user.application.ports.output.notific
 import com.eat.sleep.auth_identity_service.user.application.ports.output.notification.ExistsCode;
 import com.eat.sleep.auth_identity_service.user.application.ports.output.notification.GenerateCodeConfirm;
 import com.eat.sleep.auth_identity_service.user.application.ports.output.render.RenderTemplate;
-import com.eat.sleep.auth_identity_service.user.domain.model.UserEmployee;
+import com.eat.sleep.auth_identity_service.user.domain.model.UserEmployeeEntityDomain;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -25,7 +25,7 @@ public class EmailOutputAdapter implements ConfirmationRegisterUseNotificationPo
     private final SendEmail sendEmail;
 
     @Override
-    public void notifyConfirmRegister(UserEmployee userEmployee) {
+    public void notifyConfirmRegister(UserEmployeeEntityDomain userEmployee) {
         String code = generateConfirmCode.generateConfirmCode(userEmployee.getEmail());
         Map<String, Object> templateVariables = Map.of("code", code.toCharArray(), "user", userEmployee);
         String confirmationHtml = renderTemplate.renderTemplate("sign-up-confirmation", templateVariables);

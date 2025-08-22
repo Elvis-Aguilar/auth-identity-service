@@ -35,6 +35,7 @@ public class Employee {
         this.address = address;
         this.hotelId = hotelId;
         this.restaurantId = restaurantId;
+        this.validate();
     }
 
     public Employee(String fullName, String cui, String phone, String email, String jobPosition, BigDecimal salary, String address, UUID hotelId, UUID restaurantId) {
@@ -47,6 +48,7 @@ public class Employee {
         this.address = address;
         this.hotelId = hotelId;
         this.restaurantId = restaurantId;
+        this.validate();
     }
 
     private void validate() {
@@ -65,5 +67,9 @@ public class Employee {
         if (!(this.salary.compareTo(BigDecimal.ZERO)>0)){
             throw new InvalidConfigurationException("El salario no debe ser mayor a cero");
         }
+    }
+
+    public boolean isAssignedToHotel() {
+        return this.hotelId != null;
     }
 }

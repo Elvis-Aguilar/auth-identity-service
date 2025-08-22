@@ -33,9 +33,7 @@ public class EmployeeRepositoryOutputAdapter implements FindingEmployeeByEmailOu
 
         EmployeeDBEntity employeeDBEntity = this.employeeDBRepository.save(this.employeeMapper.toDBEntity(employee));
 
-        Employee employeeSaved = this.employeeMapper.toDomain(employeeDBEntity);
-
-        return employeeSaved;
+        return this.employeeMapper.toDomain(employeeDBEntity);
     }
 
     @Override

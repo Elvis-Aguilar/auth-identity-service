@@ -38,7 +38,5 @@ public class EmployeeControllerAdapter {
         CreateEmployeeResponseDto createEmployeeResponseDto = this.createEmployeeMapper.toResponseDto(employee);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createEmployeeResponseDto);
-
-
     }
 }

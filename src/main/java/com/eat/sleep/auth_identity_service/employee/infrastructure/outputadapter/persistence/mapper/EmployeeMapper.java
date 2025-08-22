@@ -28,7 +28,6 @@ public class EmployeeMapper {
 
         return EmployeeDBEntity
                 .builder()
-                .id(employee.getId())
                 .email(employee.getEmail())
                 .cui(employee.getCui())
                 .RestaurantId(employee.getRestaurantId())

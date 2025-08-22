@@ -1,9 +1,9 @@
 package com.eat.sleep.auth_identity_service.user.application.ports.output.persistence;
 
-import com.eat.sleep.auth_identity_service.user.domain.model.UserEmployee;
+import com.eat.sleep.auth_identity_service.user.domain.model.UserEmployeeEntityDomain;
 
 import java.util.Optional;
 
 public interface FindingUserEmployeeByEmailAndRoleOutputPort {
-    Optional<UserEmployee> findByEmailAndRole(String email, String role);
+    Optional<UserEmployeeEntityDomain> findByEmailAndRole(String email, String role);
 }

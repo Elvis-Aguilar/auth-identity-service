@@ -47,6 +47,7 @@ public class CustomerDBEntity {
     @Column(nullable = false)
     private String address;
 
+    @Builder.Default
     private Integer loyaltyPoints = 0;
 
     @OneToMany(mappedBy = "customer")

@@ -1,7 +1,7 @@
 package com.eat.sleep.auth_identity_service.user.application.ports.output.notification;
 
-import com.eat.sleep.auth_identity_service.user.domain.model.UserEmployee;
+import com.eat.sleep.auth_identity_service.user.domain.model.UserEmployeeEntityDomain;
 
 public interface ConfirmationRegisterUseNotificationPort {
-    void notifyConfirmRegister(UserEmployee userEmployee);
+    void notifyConfirmRegister(UserEmployeeEntityDomain userEmployee);
 }

@@ -56,7 +56,7 @@ public class AuthConfig {
 
     @Bean
     AuthenticationManager authenticationManager(UserDBRepository userRepository) {
-        return new AuthManager(userRepository, passwordEncoder(), signUpCondifmationCodes());
+        return new AuthManagerOutputPortAdapter(userRepository, passwordEncoder(), signUpCondifmationCodes());
     }
 
     @Bean

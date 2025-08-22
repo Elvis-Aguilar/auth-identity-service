@@ -30,13 +30,20 @@ public class CreateEmployeeCase implements CreatingEmployeeInputPort {
             throw new EntityAlreadyExistsException("Empleado ya existente con ese correo");
         }
 
-        // validar cui
+        // validar que el cui del empleado no exista
         if (this.findingEmployeeByCuiOutputPort.findByEmployeeByCui(createEmployeeDto.getCui()).isPresent()){
             throw new EntityAlreadyExistsException("Empleado ya existente con ese CUI");
         }
 
         // crear empleado
         Employee newEmployee = createEmployeeDto.toDomain();
+
+        // validaciones tambien son output ports, consultando micros servicio de hoteles y restaurantes
+        if (newEmployee.isAssignedToHotel()){
+            //TODO: validar que el hotel exista
+        }else{
+            //TODO: validar que el restaurante exista
+        }
 
         // persistencia
         Employee savedEmployee = this.storingEmployeeOutputPort.save(newEmployee);

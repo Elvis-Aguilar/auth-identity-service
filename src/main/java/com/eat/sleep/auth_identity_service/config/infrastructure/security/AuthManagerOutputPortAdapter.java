@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class AuthManager implements AuthenticationManager {
+public class AuthManagerOutputPortAdapter implements AuthenticationManager {
 
     private final UserDBRepository userDBRepository;
     private final PasswordEncoder encoder;
