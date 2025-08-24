@@ -27,12 +27,14 @@ public class UserEmployeeEntityDomain extends UserEntityDomain {
 
     private void validate() {
 
-        if (employeeId == null) {
-            throw new EntityConflictUserType("El usuario debe ser un empleado");
-        }
+        if (!role.getName().equalsIgnoreCase("GERENTE")){
+            if (employeeId == null) {
+                throw new EntityConflictUserType("El usuario debe ser un empleado");
+            }
 
-        if (Objects.equals(this.role, "CUSTOMER")){
-            throw new EntityConflictUserType("El usuario no pude ser cliente");
+            if (Objects.equals(this.role, "CUSTOMER")){
+                throw new EntityConflictUserType("El usuario no pude ser cliente");
+            }
         }
     }
 

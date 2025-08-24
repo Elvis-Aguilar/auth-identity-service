@@ -21,7 +21,7 @@ import org.springframework.validation.annotation.Validated;
 @RequiredArgsConstructor
 public class CreateUserEmployeeCase implements CreatingUserEmployeeInputPort {
 
-    private final StoringUserEmployeeOutputPort storingAuthorOutputPort;
+    private final StoringUserEmployeeOutputPort storingUserEmployeeOutputPort;
     private final FindingUserEmployeeByEmailAndRoleOutputPort findingUserEmployeeByEmailAndRoleOutputPort;
     private final ConfirmationRegisterUseNotificationPort confirmationRegisterUseNotificationPort;
     private final FindingEmployeeByEmailOutputPort findingEmployeeByEmailOutputPort;
@@ -34,9 +34,8 @@ public class CreateUserEmployeeCase implements CreatingUserEmployeeInputPort {
     public UserEmployeeEntityDomain createUserEmployee(CreateUserEmployeeDto createUserEmployeeDto) {
 
         // validar si existe un empleado con ese cui
-        if (this.findingEmployeeByCuiOutputPort.findByEmployeeByCui(createUserEmployeeDto.getCui()).isPresent()){
+        if (this.findingEmployeeByCuiOutputPort.findByEmployeeByCui(createUserEmployeeDto.getCui()).isEmpty())
             throw new EntityAlreadyExistsException("No existe un empleado con ese cui");
-        }
 
         // validar si el empleado existe
         Employee employee = findingEmployeeByEmailOutputPort
@@ -56,7 +55,7 @@ public class CreateUserEmployeeCase implements CreatingUserEmployeeInputPort {
         newUserEmployee.setPassword(passwordEncoderPort.encode(newUserEmployee.getPassword()));
 
         // persistencia
-        UserEmployeeEntityDomain savedUserEmployee = storingAuthorOutputPort.save(newUserEmployee, employee);
+        UserEmployeeEntityDomain savedUserEmployee = storingUserEmployeeOutputPort.save(newUserEmployee, employee);
 
         // enviar correo notificacion
         confirmationRegisterUseNotificationPort.notifyConfirmRegister(savedUserEmployee);

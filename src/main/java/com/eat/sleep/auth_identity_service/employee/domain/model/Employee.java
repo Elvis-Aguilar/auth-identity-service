@@ -56,12 +56,15 @@ public class Employee {
 
         // TODO: mas validaciones de dominio.
 
-        if (this.restaurantId == null && this.hotelId == null) {
-            throw new EntityConflictUserType("El empleado debe estar asignado a un retaurante o un hotel");
-        }
+        if (!jobPosition.equalsIgnoreCase("GERENTE")){
+            if (this.restaurantId == null && this.hotelId == null) {
+                throw new EntityConflictUserType("El empleado debe estar asignado a un retaurante o un hotel");
+            }
 
-        if (this.restaurantId != null && this.hotelId != null) {
-            throw new EntityConflictUserType("El empleado solo puede estar asignado a un hoter o aun restaurente, no los dos a la vez");
+            if (this.restaurantId != null && this.hotelId != null) {
+                throw new EntityConflictUserType("El empleado solo puede estar asignado a un hoter o aun restaurente, no los dos a la vez");
+            }
+
         }
 
         if (!(this.salary.compareTo(BigDecimal.ZERO)>0)){

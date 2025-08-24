@@ -43,7 +43,7 @@ public class AuthConfig {
                 .csrf(c -> c.disable())
                 .sessionManagement(s -> s.sessionCreationPolicy(STATELESS))
                 .authorizeHttpRequests(a -> a
-                        .requestMatchers("v1/user/employee/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html",
+                        .requestMatchers("v1/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html",
                                 "/v1/roles", "/error")
                         .permitAll()
                         .anyRequest().authenticated())

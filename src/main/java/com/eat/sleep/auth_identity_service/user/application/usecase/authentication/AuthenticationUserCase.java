@@ -4,6 +4,7 @@ import com.eat.sleep.auth_identity_service.common.application.annotations.UseCas
 import com.eat.sleep.auth_identity_service.user.application.ports.input.AuthenticatingUserInputPort;
 import com.eat.sleep.auth_identity_service.user.application.ports.output.persistence.FindingUserByEmailOutputPort;
 import com.eat.sleep.auth_identity_service.user.application.ports.output.security.UnAuthenticated;
+import com.eat.sleep.auth_identity_service.user.application.ports.output.security.jwt.GeneratingToken;
 import com.eat.sleep.auth_identity_service.user.domain.model.UserEntityDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +21,7 @@ public class AuthenticationUserCase implements AuthenticatingUserInputPort {
     private final UnAuthenticated unAuthenticated;
     private final AuthenticationManager authenticationManager;
     private final FindingUserByEmailOutputPort findingUserByEmailOutputPort;
+    private final GeneratingToken generatingToken;
 
 
     @Override
@@ -27,9 +29,8 @@ public class AuthenticationUserCase implements AuthenticatingUserInputPort {
     public UserEntityDomain authenticationUser(AuthUserDto authUserDto) {
         authenticationManager.authenticate(unAuthenticated.unauthenticatedUser(authUserDto.getEmail(), authUserDto.getPassword()));
 
-        UserEntityDomain userEntityDomain = findingUserByEmailOutputPort.findByEmail(authUserDto.getEmail())
+        return findingUserByEmailOutputPort.findByEmail(authUserDto.getEmail())
+                .map(user -> { user.setToken(generatingToken.generateToken(user)); return user; })
                 .orElseThrow(() -> new InsufficientAuthenticationException("No se encontro el registro del usuario"));
-
-        return userEntityDomain;
     }
 }

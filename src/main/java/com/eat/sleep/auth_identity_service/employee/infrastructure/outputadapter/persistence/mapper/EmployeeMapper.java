@@ -34,6 +34,7 @@ public class EmployeeMapper {
                 .address(employee.getAddress())
                 .fullName(employee.getFullName())
                 .salary(employee.getSalary())
+                .phone(employee.getPhone())
                 .jobPosition(employee.getJobPosition())
                 .HotelId(employee.getHotelId())
                 .build();

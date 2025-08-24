@@ -46,6 +46,7 @@ public class UserMapper {
         return UserDBEntity.builder()
                 .email(userEmployee.getEmail())
                 .employee(employeeDBEntity)
+                .customer(null)
                 .active(true)
                 .password(userEmployee.getPassword())
                 .role(role)

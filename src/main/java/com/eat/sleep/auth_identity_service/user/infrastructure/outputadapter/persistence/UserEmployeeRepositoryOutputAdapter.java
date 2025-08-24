@@ -5,6 +5,7 @@ import com.eat.sleep.auth_identity_service.common.infrastructure.anotation.Persi
 import com.eat.sleep.auth_identity_service.employee.domain.model.Employee;
 import com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.entity.EmployeeDBEntity;
 import com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.mapper.EmployeeMapper;
+import com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.repository.EmployeeDBRepository;
 import com.eat.sleep.auth_identity_service.role.infrastructure.output.persistence.entity.RoleDBEntity;
 import com.eat.sleep.auth_identity_service.role.infrastructure.output.persistence.repository.RoleDBRepository;
 import com.eat.sleep.auth_identity_service.user.application.ports.output.persistence.FindingUserEmployeeByEmailAndRoleOutputPort;
@@ -25,6 +26,7 @@ public class UserEmployeeRepositoryOutputAdapter implements FindingUserEmployeeB
     private final UserDBRepository userDBRepository;
     private final UserMapper userMapper;
     private final RoleDBRepository roleDBRepository;
+    private final EmployeeDBRepository employeeDBRepository;
     private final EmployeeMapper employeeMapper;
 
     @Override
@@ -40,7 +42,8 @@ public class UserEmployeeRepositoryOutputAdapter implements FindingUserEmployeeB
         RoleDBEntity roleDBEntity = this.roleDBRepository.findByName(userEmployee.getRole().getName())
                 .orElseThrow(()-> new RoleNotExist("No existe el rol para el empleado"));
 
-        EmployeeDBEntity employeeDBEntity = this.employeeMapper.toDBEntity(employee);
+        EmployeeDBEntity employeeDBEntity = this.employeeDBRepository.findByCui(employee.getCui())
+                .orElseThrow(()-> new RoleNotExist("No existe el empleado"));
 
         UserDBEntity userDBEntity = this.userDBRepository.save(this.userMapper.toDBEntity(userEmployee, roleDBEntity, employeeDBEntity));
 
