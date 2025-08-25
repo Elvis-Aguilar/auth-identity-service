@@ -3,6 +3,7 @@ package com.eat.sleep.auth_identity_service.config.infrastructure.security;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -89,7 +90,7 @@ public class AuthConfig {
     }
 
     private AbstractAuthenticationToken convertJwtToAuthentication(Jwt jwt) {
-        long id = Long.parseLong(jwt.getSubject());
+        UUID id = UUID.fromString(jwt.getSubject());
         List<SimpleGrantedAuthority> authorities = jwt.getClaimAsStringList("auths")
                 .stream()
                 .map(SimpleGrantedAuthority::new)

@@ -1,16 +1,16 @@
 package com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.mapper;
 
-import com.eat.sleep.auth_identity_service.employee.domain.model.Employee;
+import com.eat.sleep.auth_identity_service.employee.domain.model.EmployeeDomainEntity;
 import com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.entity.EmployeeDBEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class EmployeeMapper {
 
-    public Employee toDomain(EmployeeDBEntity employeeDBEntity){
+    public EmployeeDomainEntity toDomain(EmployeeDBEntity employeeDBEntity){
         if (employeeDBEntity == null) return null;
 
-        return new Employee(employeeDBEntity.getId(),
+        return new EmployeeDomainEntity(employeeDBEntity.getId(),
                 employeeDBEntity.getFullName(),
                 employeeDBEntity.getCui(),
                 employeeDBEntity.getPhone(),
@@ -22,7 +22,7 @@ public class EmployeeMapper {
                 employeeDBEntity.getRestaurantId());
     }
 
-    public EmployeeDBEntity toDBEntity(Employee employee){
+    public EmployeeDBEntity toDBEntity(EmployeeDomainEntity employee){
 
         if (employee == null) return null;
 

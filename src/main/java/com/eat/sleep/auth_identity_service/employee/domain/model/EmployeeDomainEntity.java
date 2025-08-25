@@ -2,16 +2,14 @@ package com.eat.sleep.auth_identity_service.employee.domain.model;
 
 import com.eat.sleep.auth_identity_service.common.application.exception.EntityConflictUserType;
 import io.micrometer.core.instrument.config.InvalidConfigurationException;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NonNull;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
 @Getter
-public class Employee {
+public class EmployeeDomainEntity {
 
     private UUID id;
     private String fullName;
@@ -24,7 +22,7 @@ public class Employee {
     private UUID hotelId;
     private UUID restaurantId;
 
-    public Employee(UUID id, String fullName, String cui, String phone, String email, String jobPosition, BigDecimal salary, String address, UUID hotelId, UUID restaurantId) {
+    public EmployeeDomainEntity(UUID id, String fullName, String cui, String phone, String email, String jobPosition, BigDecimal salary, String address, UUID hotelId, UUID restaurantId) {
         this.id = id;
         this.fullName = fullName;
         this.cui = cui;
@@ -38,7 +36,7 @@ public class Employee {
         this.validate();
     }
 
-    public Employee(String fullName, String cui, String phone, String email, String jobPosition, BigDecimal salary, String address, UUID hotelId, UUID restaurantId) {
+    public EmployeeDomainEntity(String fullName, String cui, String phone, String email, String jobPosition, BigDecimal salary, String address, UUID hotelId, UUID restaurantId) {
         this.fullName = fullName;
         this.cui = cui;
         this.phone = phone;

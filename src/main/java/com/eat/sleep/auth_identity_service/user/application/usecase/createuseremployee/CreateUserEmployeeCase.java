@@ -4,7 +4,7 @@ import com.eat.sleep.auth_identity_service.common.application.annotations.UseCas
 import com.eat.sleep.auth_identity_service.common.application.exception.EntityAlreadyExistsException;
 import com.eat.sleep.auth_identity_service.employee.application.ports.output.FindingEmployeeByCuiOutputPort;
 import com.eat.sleep.auth_identity_service.employee.application.ports.output.FindingEmployeeByEmailOutputPort;
-import com.eat.sleep.auth_identity_service.employee.domain.model.Employee;
+import com.eat.sleep.auth_identity_service.employee.domain.model.EmployeeDomainEntity;
 import com.eat.sleep.auth_identity_service.user.application.ports.input.CreatingUserEmployeeInputPort;
 import com.eat.sleep.auth_identity_service.user.application.ports.output.security.encript.PasswordEncoderPort;
 import com.eat.sleep.auth_identity_service.user.application.ports.output.notification.ConfirmationRegisterUseNotificationPort;
@@ -38,7 +38,7 @@ public class CreateUserEmployeeCase implements CreatingUserEmployeeInputPort {
             throw new EntityAlreadyExistsException("No existe un empleado con ese cui");
 
         // validar si el empleado existe
-        Employee employee = findingEmployeeByEmailOutputPort
+        EmployeeDomainEntity employee = findingEmployeeByEmailOutputPort
                 .findByEmployeeByEmail(createUserEmployeeDto.getEmail())
                 .orElseThrow(() -> new EntityAlreadyExistsException("El email no está relacionado con un empleado"));
 

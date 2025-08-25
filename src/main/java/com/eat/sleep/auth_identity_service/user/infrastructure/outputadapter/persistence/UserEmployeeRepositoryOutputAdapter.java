@@ -2,7 +2,7 @@ package com.eat.sleep.auth_identity_service.user.infrastructure.outputadapter.pe
 
 import com.eat.sleep.auth_identity_service.common.application.exception.RoleNotExist;
 import com.eat.sleep.auth_identity_service.common.infrastructure.anotation.PersistenceAdapter;
-import com.eat.sleep.auth_identity_service.employee.domain.model.Employee;
+import com.eat.sleep.auth_identity_service.employee.domain.model.EmployeeDomainEntity;
 import com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.entity.EmployeeDBEntity;
 import com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.mapper.EmployeeMapper;
 import com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.repository.EmployeeDBRepository;
@@ -38,7 +38,7 @@ public class UserEmployeeRepositoryOutputAdapter implements FindingUserEmployeeB
 
     @Override
     @Transactional
-    public UserEmployeeEntityDomain save(UserEmployeeEntityDomain userEmployee, Employee employee) {
+    public UserEmployeeEntityDomain save(UserEmployeeEntityDomain userEmployee, EmployeeDomainEntity employee) {
         RoleDBEntity roleDBEntity = this.roleDBRepository.findByName(userEmployee.getRole().getName())
                 .orElseThrow(()-> new RoleNotExist("No existe el rol para el empleado"));
 

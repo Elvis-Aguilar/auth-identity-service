@@ -7,7 +7,7 @@ import com.eat.sleep.auth_identity_service.employee.application.ports.output.Fin
 import com.eat.sleep.auth_identity_service.employee.application.ports.output.FindingEmployeeByEmailOutputPort;
 import com.eat.sleep.auth_identity_service.employee.application.ports.output.StoringEmployeeOutputPort;
 import com.eat.sleep.auth_identity_service.employee.application.usecase.dto.CreateEmployeeDto;
-import com.eat.sleep.auth_identity_service.employee.domain.model.Employee;
+import com.eat.sleep.auth_identity_service.employee.domain.model.EmployeeDomainEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -23,7 +23,7 @@ public class CreateEmployeeCase implements CreatingEmployeeInputPort {
 
     @Override
     @Transactional
-    public Employee createEmployee(CreateEmployeeDto createEmployeeDto) {
+    public EmployeeDomainEntity createEmployee(CreateEmployeeDto createEmployeeDto) {
 
         // validar que no exista otro empleado con ese email
         if (this.findingEmployeeByEmailOutputPort.findByEmployeeByEmail(createEmployeeDto.getEmail()).isPresent()){
@@ -36,7 +36,7 @@ public class CreateEmployeeCase implements CreatingEmployeeInputPort {
         }
 
         // crear empleado
-        Employee newEmployee = createEmployeeDto.toDomain();
+        EmployeeDomainEntity newEmployee = createEmployeeDto.toDomain();
 
         // validaciones tambien son output ports, consultando micros servicio de hoteles y restaurantes
         if (newEmployee.isAssignedToHotel()){
@@ -46,7 +46,7 @@ public class CreateEmployeeCase implements CreatingEmployeeInputPort {
         }
 
         // persistencia
-        Employee savedEmployee = this.storingEmployeeOutputPort.save(newEmployee);
+        EmployeeDomainEntity savedEmployee = this.storingEmployeeOutputPort.save(newEmployee);
 
         return savedEmployee;
     }

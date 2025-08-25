@@ -37,8 +37,8 @@ public class GenereteTokenOutputAdapter implements GeneratingToken {
                 .expiresAt(now.plus(tokenProperty.expirationTime(), tokenProperty.timeUnit()))
                 .subject(String.valueOf(userEntityDomain.getId()))
                 .claim("auths", List.of("ROLE_".concat(userEntityDomain.getRole().getName())))
-                .claim("employee_id", employeeId == null ? "" : employeeId)
-                .claim("customer_id", customerId == null ? "" : customerId)
+                .claim("employee_id", employeeId == null ? "null" : employeeId)
+                .claim("customer_id", customerId == null ? "null" : customerId)
                 .build();
 
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
