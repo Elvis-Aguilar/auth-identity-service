@@ -1,10 +1,7 @@
 package com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence;
 
 import com.eat.sleep.auth_identity_service.common.infrastructure.anotation.PersistenceAdapter;
-import com.eat.sleep.auth_identity_service.employee.application.ports.output.FindingAllEmployeesNoMangerOutputPort;
-import com.eat.sleep.auth_identity_service.employee.application.ports.output.FindingEmployeeByCuiOutputPort;
-import com.eat.sleep.auth_identity_service.employee.application.ports.output.FindingEmployeeByEmailOutputPort;
-import com.eat.sleep.auth_identity_service.employee.application.ports.output.StoringEmployeeOutputPort;
+import com.eat.sleep.auth_identity_service.employee.application.ports.output.*;
 import com.eat.sleep.auth_identity_service.employee.domain.model.EmployeeDomainEntity;
 import com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.entity.EmployeeDBEntity;
 import com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.mapper.EmployeeMapper;
@@ -18,7 +15,7 @@ import java.util.Optional;
 @PersistenceAdapter
 @RequiredArgsConstructor
 public class EmployeeRepositoryOutputAdapter implements FindingEmployeeByEmailOutputPort, FindingEmployeeByCuiOutputPort,
-        StoringEmployeeOutputPort, FindingAllEmployeesNoMangerOutputPort {
+        StoringEmployeeOutputPort, FindingAllEmployeesNoMangerOutputPort, FindingAllEmployeesOutputPort {
 
     private final EmployeeDBRepository employeeDBRepository;
     private final EmployeeMapper employeeMapper;
@@ -49,6 +46,14 @@ public class EmployeeRepositoryOutputAdapter implements FindingEmployeeByEmailOu
     @Override
     public List<EmployeeDomainEntity> findAllEmployeesNoManger() {
         return this.employeeDBRepository.findAllByJobPositionNot("GERENTE")
+                .stream()
+                .map(employeeMapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public List<EmployeeDomainEntity> findAllEmployees() {
+        return this.employeeDBRepository.findAll()
                 .stream()
                 .map(employeeMapper::toDomain)
                 .toList();

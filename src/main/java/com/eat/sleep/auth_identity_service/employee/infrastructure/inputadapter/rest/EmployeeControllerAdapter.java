@@ -2,6 +2,7 @@ package com.eat.sleep.auth_identity_service.employee.infrastructure.inputadapter
 
 import com.eat.sleep.auth_identity_service.common.infrastructure.anotation.WebAdapter;
 import com.eat.sleep.auth_identity_service.employee.application.ports.input.CreatingEmployeeInputPort;
+import com.eat.sleep.auth_identity_service.employee.application.ports.input.ListingAllEmployeesInputPort;
 import com.eat.sleep.auth_identity_service.employee.application.ports.input.ListingAllEmployeesNoManagersInputPort;
 import com.eat.sleep.auth_identity_service.employee.application.usecase.dto.CreateEmployeeDto;
 import com.eat.sleep.auth_identity_service.employee.domain.model.EmployeeDomainEntity;
@@ -27,6 +28,7 @@ public class EmployeeControllerAdapter {
     private final CreatingEmployeeInputPort creatingEmployeeInputPort;
     private final CreateEmployeeMapper createEmployeeMapper;
     private final ListingAllEmployeesNoManagersInputPort listingAllEmployeesNoManagersInputPort;
+    private final ListingAllEmployeesInputPort listingAllEmployeesInputPort;
 
     @PostMapping()
     @Transactional
@@ -44,7 +46,16 @@ public class EmployeeControllerAdapter {
 
     @GetMapping("/all/no-manager")
     public ResponseEntity<List<EmployeeResponseDto>> findAllEmployeesNoManger() {
-        List<EmployeeResponseDto> employees = this.listingAllEmployeesNoManagersInputPort.listAllAuthors()
+        List<EmployeeResponseDto> employees = this.listingAllEmployeesNoManagersInputPort.listAllEmployeesNoManagers()
+                .stream()
+                .map(createEmployeeMapper::toFindResponseDto)
+                .toList();
+        return ResponseEntity.ok(employees);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<EmployeeResponseDto>> findAllEmployees() {
+        List<EmployeeResponseDto> employees = this.listingAllEmployeesInputPort.findAllEmployees()
                 .stream()
                 .map(createEmployeeMapper::toFindResponseDto)
                 .toList();

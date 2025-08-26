@@ -34,8 +34,9 @@ public class CreateUserEmployeeCase implements CreatingUserEmployeeInputPort {
     public UserEmployeeEntityDomain createUserEmployee(CreateUserEmployeeDto createUserEmployeeDto) {
 
         // validar si existe un empleado con ese cui
-        if (this.findingEmployeeByCuiOutputPort.findByEmployeeByCui(createUserEmployeeDto.getCui()).isEmpty())
+        if (this.findingEmployeeByCuiOutputPort.findByEmployeeByCui(createUserEmployeeDto.getCui()).isEmpty()){
             throw new EntityAlreadyExistsException("No existe un empleado con ese cui");
+        }
 
         // validar si el empleado existe
         EmployeeDomainEntity employee = findingEmployeeByEmailOutputPort

@@ -4,7 +4,7 @@ import com.eat.sleep.auth_identity_service.employee.domain.model.EmployeeDomainE
 
 import java.util.List;
 
-public interface ListingAllEmployeesNoManagersInputPort {
+public interface ListingAllEmployeesInputPort {
 
-    List<EmployeeDomainEntity> listAllEmployeesNoManagers();
+    List<EmployeeDomainEntity> findAllEmployees();
 }

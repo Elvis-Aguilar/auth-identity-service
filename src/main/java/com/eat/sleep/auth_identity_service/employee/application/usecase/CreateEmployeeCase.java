@@ -46,8 +46,6 @@ public class CreateEmployeeCase implements CreatingEmployeeInputPort {
         }
 
         // persistencia
-        EmployeeDomainEntity savedEmployee = this.storingEmployeeOutputPort.save(newEmployee);
-
-        return savedEmployee;
+        return this.storingEmployeeOutputPort.save(newEmployee);
     }
 }
