@@ -1,7 +1,7 @@
 package com.eat.sleep.auth_identity_service.user.infrastructure.inputadapter.rest;
 
 
-import com.eat.sleep.auth_identity_service.common.infrastructure.anotation.WebAdapter;
+import com.eat.sleep.auth_identity_service.common.infrastructure.annotation.WebAdapter;
 import com.eat.sleep.auth_identity_service.user.application.ports.input.CreatingUserEmployeeInputPort;
 import com.eat.sleep.auth_identity_service.user.application.usecase.createuseremployee.CreateUserEmployeeDto;
 import com.eat.sleep.auth_identity_service.user.domain.model.UserEmployeeEntityDomain;

@@ -3,7 +3,7 @@ package com.eat.sleep.auth_identity_service.config.infrastructure;
 import java.util.List;
 
 
-import com.eat.sleep.auth_identity_service.common.infrastructure.anotation.CurrentUser;
+import com.eat.sleep.auth_identity_service.common.infrastructure.annotation.CurrentUser;
 import com.eat.sleep.auth_identity_service.user.infrastructure.outputadapter.persistence.entity.UserDBEntity;
 import com.eat.sleep.auth_identity_service.user.infrastructure.outputadapter.persistence.repository.UserDBRepository;
 import org.springframework.context.annotation.Configuration;

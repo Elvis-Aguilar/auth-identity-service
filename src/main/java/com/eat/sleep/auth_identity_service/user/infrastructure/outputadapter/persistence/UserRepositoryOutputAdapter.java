@@ -1,7 +1,6 @@
 package com.eat.sleep.auth_identity_service.user.infrastructure.outputadapter.persistence;
 
-import com.eat.sleep.auth_identity_service.common.infrastructure.anotation.PersistenceAdapter;
-import com.eat.sleep.auth_identity_service.common.infrastructure.exception.FailedAuthenticateException;
+import com.eat.sleep.auth_identity_service.common.infrastructure.annotation.PersistenceAdapter;
 import com.eat.sleep.auth_identity_service.user.application.ports.output.persistence.FindingUserByEmailOutputPort;
 import com.eat.sleep.auth_identity_service.user.domain.model.UserEntityDomain;
 import com.eat.sleep.auth_identity_service.user.infrastructure.outputadapter.persistence.entity.UserDBEntity;

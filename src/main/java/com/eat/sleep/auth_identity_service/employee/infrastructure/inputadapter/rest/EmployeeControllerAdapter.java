@@ -1,6 +1,6 @@
 package com.eat.sleep.auth_identity_service.employee.infrastructure.inputadapter.rest;
 
-import com.eat.sleep.auth_identity_service.common.infrastructure.anotation.WebAdapter;
+import com.eat.sleep.auth_identity_service.common.infrastructure.annotation.WebAdapter;
 import com.eat.sleep.auth_identity_service.employee.application.ports.input.CreatingEmployeeInputPort;
 import com.eat.sleep.auth_identity_service.employee.application.ports.input.ListingAllEmployeesInputPort;
 import com.eat.sleep.auth_identity_service.employee.application.ports.input.ListingAllEmployeesNoManagersInputPort;

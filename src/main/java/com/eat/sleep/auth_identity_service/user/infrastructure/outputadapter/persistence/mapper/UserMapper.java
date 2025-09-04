@@ -15,7 +15,7 @@ public class UserMapper {
     public UserEntityDomain toDomain(UserDBEntity userDBEntity){
         if (userDBEntity == null) return null;
 
-        if ( userDBEntity.getRole().getName().equalsIgnoreCase("CUSTOMER")){
+        if ( userDBEntity.getRole().getName().equalsIgnoreCase("CLIENTE")){
             return this.toDomainUserCustomer(userDBEntity);
         }
 

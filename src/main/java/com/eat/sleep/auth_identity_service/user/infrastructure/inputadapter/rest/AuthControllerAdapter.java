@@ -1,6 +1,6 @@
 package com.eat.sleep.auth_identity_service.user.infrastructure.inputadapter.rest;
 
-import com.eat.sleep.auth_identity_service.common.infrastructure.anotation.WebAdapter;
+import com.eat.sleep.auth_identity_service.common.infrastructure.annotation.WebAdapter;
 import com.eat.sleep.auth_identity_service.user.application.ports.input.AuthenticatingUserInputPort;
 import com.eat.sleep.auth_identity_service.user.application.ports.input.ConfirmationCodeInputPort;
 import com.eat.sleep.auth_identity_service.user.application.usecase.authentication.AuthUserDto;

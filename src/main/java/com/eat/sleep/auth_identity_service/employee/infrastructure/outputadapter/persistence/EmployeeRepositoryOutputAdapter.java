@@ -1,6 +1,6 @@
 package com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence;
 
-import com.eat.sleep.auth_identity_service.common.infrastructure.anotation.PersistenceAdapter;
+import com.eat.sleep.auth_identity_service.common.infrastructure.annotation.PersistenceAdapter;
 import com.eat.sleep.auth_identity_service.employee.application.ports.output.*;
 import com.eat.sleep.auth_identity_service.employee.domain.model.EmployeeDomainEntity;
 import com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.entity.EmployeeDBEntity;

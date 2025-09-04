@@ -1,4 +1,4 @@
-package com.eat.sleep.auth_identity_service.common.infrastructure.anotation;
+package com.eat.sleep.auth_identity_service.common.infrastructure.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
