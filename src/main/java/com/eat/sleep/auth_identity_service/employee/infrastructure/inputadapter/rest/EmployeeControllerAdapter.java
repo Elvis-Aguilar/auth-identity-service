@@ -2,6 +2,7 @@ package com.eat.sleep.auth_identity_service.employee.infrastructure.inputadapter
 
 import com.eat.sleep.auth_identity_service.common.infrastructure.annotation.WebAdapter;
 import com.eat.sleep.auth_identity_service.employee.application.ports.input.CreatingEmployeeInputPort;
+import com.eat.sleep.auth_identity_service.employee.application.ports.input.FindEmployeeByIdInputPort;
 import com.eat.sleep.auth_identity_service.employee.application.ports.input.ListingAllEmployeesInputPort;
 import com.eat.sleep.auth_identity_service.employee.application.ports.input.ListingAllEmployeesNoManagersInputPort;
 import com.eat.sleep.auth_identity_service.employee.application.usecase.dto.CreateEmployeeDto;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("v1/employees")
@@ -29,6 +31,7 @@ public class EmployeeControllerAdapter {
     private final CreateEmployeeMapper createEmployeeMapper;
     private final ListingAllEmployeesNoManagersInputPort listingAllEmployeesNoManagersInputPort;
     private final ListingAllEmployeesInputPort listingAllEmployeesInputPort;
+    private final FindEmployeeByIdInputPort findEmployeeByIdInputPort;
 
     @PostMapping()
     @Transactional
@@ -42,6 +45,15 @@ public class EmployeeControllerAdapter {
         CreateEmployeeResponseDto createEmployeeResponseDto = this.createEmployeeMapper.toResponseDto(employee);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createEmployeeResponseDto);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<EmployeeResponseDto> findEmployeeById(@PathVariable UUID id) {
+        EmployeeDomainEntity domain = findEmployeeByIdInputPort.finEmployeeById(id);
+
+        EmployeeResponseDto dto = createEmployeeMapper.toFindResponseDto(domain);
+
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/all/no-manager")

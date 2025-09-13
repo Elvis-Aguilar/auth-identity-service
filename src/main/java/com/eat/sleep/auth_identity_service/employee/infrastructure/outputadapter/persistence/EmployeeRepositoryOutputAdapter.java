@@ -1,6 +1,7 @@
 package com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence;
 
 import com.eat.sleep.auth_identity_service.common.infrastructure.annotation.PersistenceAdapter;
+import com.eat.sleep.auth_identity_service.common.infrastructure.exception.BadRequestException;
 import com.eat.sleep.auth_identity_service.employee.application.ports.output.*;
 import com.eat.sleep.auth_identity_service.employee.domain.model.EmployeeDomainEntity;
 import com.eat.sleep.auth_identity_service.employee.infrastructure.outputadapter.persistence.entity.EmployeeDBEntity;
@@ -11,11 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
 public class EmployeeRepositoryOutputAdapter implements FindingEmployeeByEmailOutputPort, FindingEmployeeByCuiOutputPort,
-        StoringEmployeeOutputPort, FindingAllEmployeesNoMangerOutputPort, FindingAllEmployeesOutputPort {
+        StoringEmployeeOutputPort, FindingAllEmployeesNoMangerOutputPort, FindingAllEmployeesOutputPort, FindingEmployeeIdOutputPort {
 
     private final EmployeeDBRepository employeeDBRepository;
     private final EmployeeMapper employeeMapper;
@@ -57,5 +59,13 @@ public class EmployeeRepositoryOutputAdapter implements FindingEmployeeByEmailOu
                 .stream()
                 .map(employeeMapper::toDomain)
                 .toList();
+    }
+
+    @Override
+    public EmployeeDomainEntity findByEmployeeById(UUID Id) {
+        EmployeeDBEntity dbEntity = this.employeeDBRepository.findById(Id)
+                .orElseThrow(() -> new BadRequestException("Empleado no encontrado"));
+
+        return employeeMapper.toDomain(dbEntity);
     }
 }
